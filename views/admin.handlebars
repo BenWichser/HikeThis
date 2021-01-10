@@ -1,0 +1,155 @@
+<style>
+    table {
+        width: 100%;
+    }
+    table input {
+        width: 90%;
+    }
+    tr td input {
+        display: none;
+    }
+    tr td span {
+        display: block;
+    }
+    tr.editing td span {
+        display: none;
+    }
+    tr.editing td input {
+        display: block;
+    }
+</style>
+
+<header>
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./hiker">Hikers</a>
+        <li><a href="./permit">Permits</a>
+        <li><a href="./trip-report">Trip Reports</a>
+        <li><a href="./trail">Trails</a>
+        <li class="active">Administration
+    </ul>
+</header>
+
+<div class="content-wrapper">
+    <h1>Administration</h1>
+
+    <div id='adminHeader'>
+        <p>This page is meant for site administrator use.  Below, the administrators can edit or delete Trail and Permit information.</p>
+    </div>
+
+    <h2>Trail Administration</h2>
+    <div id='adminTrail' class="card">
+        <div id='adminTrailSearch' class='card-content'>
+            <h3>Trail Search</h3>
+            <p>Please use the form below to look up a trail, which you can then edit or delete, as necessary.</p>
+            <form id='adminTrailSearchForm'>
+                <div class="form-element">
+                    <label for='adminTrailSearchName'>What is the name of the trail? (enter "*" for all trails)</label>
+                    <input type='text' id='adminTrailSearchName' name='adminTrailSearchName' required />
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div id='adminTrailResults' style='display:none' class='card-content'>
+            <h3>Trail Search Results</h3>
+            <p>These are the trails we found according to the search.</p>
+            <div id='adminTrailResults'>
+            <table id="adminTrailResultsTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+            </div>
+            <button id='adminTrailResultsButton' type='submit'>Search Again</button>
+        </div>
+
+        <div id='adminTrailNoResults' style='display:none' class='card-content'>
+            <h3>No Such Trails Found</h3>
+            <p>Unfortunately, we did not locate any trails according to that search.  Feel free to try your search again.</p>
+            <button id='adminTrailSearchNoResultsButton' >Try Search Again</button>
+        </div>
+
+        <div id='adminTrailError' style='display:none' class='card-content'>
+            <h3>Trail Search Error</h3>
+            <p>Unfortunately, there was an error as we searched for the requested trail.  Feel free to try your search again.</p>
+            <button id='adminTrailErrorButton' type='submit'>Try Search Again</button>
+        </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <h2>Permit Type Administration</h2>
+    <div id='adminPermit' class="card">
+        <div id='adminPermitSearch' class='card-content'>
+            <h3>Permit Search Form</h3>
+            <p>Please use the form below to look up a permit type, which you can then edit or delete, as necessary.</p>
+            <form id='adminPermitSearchForm'>
+                <div class="form-element">
+                    <label for='adminPermitSearchName'>What is the name of the permit? (enter "*") for all permits</label>
+                    <input type='text' id='adminPermitSearchName' name='adminPermitSearchName' required />
+                </div>
+                <button id='adminPermitSearchButton' type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id='adminPermitResults' style='display:none' class='card-content'>
+            <h3>Permit Search Results</h3>
+            <p>These are the permits we found according to the search</p>
+            <div id='adminPermitResultsTable'></div>
+            <button id='adminPermitResultsButton' type='submit'>Search Again</button>
+        </div>
+
+        <div id='adminPermitNoResults' style='display:none' class='card-content'>
+            <h3>No Such Permits Found</h3>
+            <p>Unfortunately, we could not locate any permits with your serach criteria.  Feel free to try your search again.</p>
+            <button id='adminPermitNoResultsButton' >Try Search Again</button>
+        </div>
+
+        <div id='adminPermitError' style='display:none' class='card-content'>
+            <h3>Permit Search Error</h3>
+            <p>Unfortunately, there was an error as we searched for the requested hiker.  Feel free to try your search again.</p>
+            <button id='adminPermitErrorButton' type='submit'>Try Search Again</button>
+        </div>
+    </div>
+
+    <div id='adminPermitAdd' class='card'>
+        <div id='adminPermitAddForm' class='card-content'>
+            <h3>Add A Permit Type</h3>
+            <p>Please use the form below to add a permit type. Both fields are required.</p>
+            <form id='adminPermitAddFormForm'>
+                <div class='form-element'>
+                    <label for='adminPermitAddFormName'>What is the name of the permit type you would like to add?</label>
+                    <input type='text' id='adminPermitAddFormName' name='adminPermitAddFormName' required />
+                </div>
+                <div class='form-element'>
+                    <label for='adminPermitAddFormDuration'>For how long is this permit valid (in days)?</label>
+                    <input type='number' id='adminPermitAddFormDuration' name='adminPermitAddFormDuration' min='1' step='1' required />
+                </div>
+                <button id='adminPermitAddFormButton' type='submit'>Submit</button>
+            </form>
+        </div>
+
+        <div id='adminPermitAddConfirm' class='card-content' style='display:none'>
+            <h3>Add Permit Type Confirmation</h3>
+            <p>Below is the permit type you have asked to add.  Please confirm your addition, or go back if you need to edit something.</p>
+            <ul id='adminPermitAddConfirmList'>
+            </ul>
+            <button id='adminPermitAddConfirmButtonConfirmation' type='submit'>Yes. Please add this permit type.</button>
+            <button id='adminPermitAddConfirmButtonRedo' tpe-'submit'>No.  Please take me back.</button>
+        </div>
+        
+        <div id='adminPermitAddConfirmation' class='card-content' style='display:none'>
+            <h3>Permit Type Added</h3>
+            <p> You have successfully added this permit type.  You can now add another permit type if you like.</p>
+            <button id='adminPermitAddConfirmationButton' type='submit'>Add Another Permit</button>
+        </div>
+
+        <div id='adminPermitAddError' class='card-content' style='display:none'>
+            <h3>Error Adding Permit</h3>
+            <p>Unfortunately, there was an error adding your permit type.  Please feel free to try again.</p>
+            <button id='adminPermitAddErrorButton' type='submit'>Try Again</button>
+        </div>
+    </div>
+
+</div>
+
+<script type='text/javascript' src='adminScript.js'></script>

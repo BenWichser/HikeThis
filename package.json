@@ -1,0 +1,28 @@
+{
+  "name": "cs340-project-group42",
+  "version": "1.0.0",
+  "description": "CS340 Project for group 42",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BenWichser/cs340-project-group42.git"
+  },
+  "author": "Thomas Danner and Ben Wichser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BenWichser/cs340-project-group42/issues"
+  },
+  "homepage": "https://github.com/BenWichser/cs340-project-group42#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.6",
+    "forever": "^3.0.0",
+    "html-entities": "^1.3.1",
+    "mysql": "^2.18.1"
+  }
+}

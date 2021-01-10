@@ -1,0 +1,104 @@
+<header>
+    <ul>
+        <li class="active">Home</li>
+        <li><a href="./hiker">Hikers</a>
+        <li><a href="./permit">Permits</a>
+        <li><a href="./trip-report">Trip Reports</a>
+        <li><a href="./trail">Trails</a>
+        <li><a href="./admin">Administration</a>
+    </ul>
+</header>
+<div class="content-wrapper">
+    <div id="pageHeader">
+        <div class="logo">
+            {{!--
+            svg credit:
+              https://material.io/resources/icons/?search=landscape&icon=wallpaper&style=baseline
+            added gradient styling with help of:
+              https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Gradients
+            and generated gradient using:
+              https://cssgradient.io/
+            --}}
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                <defs>
+                    <radialGradient id="myGradient">
+                    <stop offset="0%" stop-color="rgba(63,194,251,1)" />
+                    <stop offset="50%" stop-color="rgba(63,94,251,0.6)" />
+                    <stop offset="100%" stop-color="rgba(252,70,107,1)" />
+                    </radialGradient>
+                </defs>
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M4 4h7V2H4c-1.1 0-2 .9-2 2v7h2V4zm6 9l-4 5h12l-3-4-2.03 2.71L10 13zm7-4.5c0-.83-.67-1.5-1.5-1.5S14 7.67 14 8.5s.67 1.5 1.5 1.5S17 9.33 17 8.5zM20 2h-7v2h7v7h2V4c0-1.1-.9-2-2-2zm0 18h-7v2h7c1.1 0 2-.9 2-2v-7h-2v7zM4 13H2v7c0 1.1.9 2 2 2h7v-2H4v-7z" fill="url('#myGradient')"/>
+            </svg>
+        </div>
+        <h1>Hiked->This</h1>
+    </div>
+
+    <div id="pageDescription" class="card">
+        <p>Welcome to HikedThis, your virtual window to hiking the great outdoors!  Please use the following pages to create information about yourself, the Hiker, any trail and parking permits you hold, or any Trail Reports you have to submit.  The last page is for administrative use: updating Trail information and Permit types.  We ask that you not alter that data unless you are a site administrator.
+        </p>
+        <p>Here are the pages we currently have:</p>
+        <ul>
+            <li> <a href="./hiker">Hikers</a>: view and enter information about hikers</li>
+            <li> <a href="./permit">Permits</a>: view and enter information about permits</li>
+            <li> <a href="./trip-report">Trip Reports</a>: enter your trip experiences, or view those of your fellow hikers.</li>
+            <li> <a href="./trail">Trails</a>: view information about the many beautiful trails available for hiking.</li>
+            <li> <a href="./admin">Administration</a>: this page is for site administrators only.  Here they will alter Trail information or delete decommissioned trails.  Permit information will also be available here for site administrators to correct or update.</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h3>Say Hi To Our Newest Hikers!</h3>
+        <div class="new-members-container">
+            <div class="new-member">
+                {{#each newHikers}}
+                <ul>
+                    <li>{{joined_at}}: Welcome, {{name}}!</li>
+                </ul>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h3>Latest Trip Reports</h3>
+        <div class="trip-report-container">
+            <div class="trip-report">
+                <table>
+                    <thead>
+                        <th>Hiker Names</th>
+                        <th>Trail</th>
+                        <th>Rating</th>
+                        <th>Difficulty</th>
+                        <th>Description</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Trail Condition</th>
+                        <th>Weather Condition</th>
+                    </thead>
+                    <tbody>
+                        {{#each tripReports}}
+                        <tr>
+                            <td width="20%">
+                                <ul>
+                                    {{#each hikersOnTrip}}
+                                        <li>{{this}}</li>
+                                    {{/each}}
+                                </ul>
+                            </td>
+                            <td>{{trailName}}</td>
+                            <td>{{rating}}</td>
+                            <td>{{difficulty}}</td>
+                            <td>{{description}}</td>
+                            <td>{{start_time}}</td>
+                            <td>{{end_time}}</td>
+                            <td>{{trail_condition}}</td>
+                            <td>{{weather_condition}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="indexScript.js"></script>

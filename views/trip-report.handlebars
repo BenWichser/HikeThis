@@ -1,0 +1,171 @@
+<header>
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./hiker">Hikers</a>
+        <li><a href="./permit">Permits</a>
+        <li class="active">Trip Reports</a>
+        <li><a href="./trail">Trails</a>
+        <li><a href="./admin">Administration</a>
+    </ul>
+</header>
+
+<div class="content-wrapper">
+    <h1>Trip Reports: How'd It Go?</h1>
+    <div id='addingATripReport' class="card">
+        <div id='tripReportAdd' class='card-content'>
+            <h2>Adding a trip report</h2>
+            <p>If you have been out on the trails, please add a trip report.  Your shared experiences can help other hikers plan their outings.</p>
+            <form name="tripReportAddForm" id="tripReportAddForm">
+                <div class="form-element">
+                    <label for='tripReportAddHikerName'>What was the hiker name?</label>
+                      <select name="tripReportAddHikerName" id="tripReportAddHikerName">
+                          {{#each hikers}}
+                            <option value="{{name}}" data-id="{{id}}">{{name}}</option>
+                          {{/each}}
+                      </select>
+                </div>
+                <div class="form-element">
+                    <label for='tripReportAddTrailName'>What was the trail name?</label>
+                    Don't see the trail here? <a href="/trail#addingATrail">Add the trail here!</a>
+                    <select name="tripReportAddTrailName" id="tripReportAddTrailName">
+                        {{#each trails}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label for="otherHikers">Did any other hikers join you? (optional)</label>
+                    <select name="tripReportOtherHiker1" id="tripReportOtherHiker1">
+                        <option value=''>Hiker #1</option>
+                        {{#each hikers}}
+                            <option value="{{name}}" data-id="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    <select name="tripReportOtherHiker2" id="tripReportOtherHiker2">
+                        <option value=''>Hiker #2</option>
+                        {{#each hikers}}
+                            <option value="{{name}}" data-id="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                    <select name="tripReportOtherHiker3" id="tripReportOtherHiker3">
+                        <option value=''>Hiker #3</option>
+                        {{#each hikers}}
+                            <option value="{{name}}" data-id="{{id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-element -flex">
+                    <label for='tripReportAddDescription'>Please describe your hike.</label>
+                    <textarea name='tripReportAddDescription' id='tripReportAddDescription' placeholder='General description of the hike.'></textarea>
+                </div>
+                <div class="form-element -flex">
+                    <label for='tripReportAddTrailConditions'>Please describe the conditions of the trail.</label>
+                    <textarea name='tripReportAddTrailConditions' id='tripReportAddTrailConditions' placeholder='General description of the trail conditions.'></textarea>
+                </div>
+                <div class="form-element -flex">
+                    <label for='tripReportAddWeatherConditions'>What were the weather conditions like during your hike?</label>
+                    <textarea id='tripReportAddWeatherConditions' name='tripReportAddWeatherConditions' placeholder='Weather conditions during the hike.'></textarea>
+                </div>
+                <div class="form-element">
+                    <label for='tripReportAddStartTime'>What time did you start the hike?</label>
+                    <input id='tripReportAddStartTime' name='tripReportAddStartTime' type='datetime-local'>
+                </div>
+                <div class="form-element">
+                    <label for='tripReportAddEndTime'>At what time did you end the hike?</label>
+                    <input id='tripReportAddEndTime' name='tripReportAddEndTime' type='datetime-local'>
+                </div>
+                <div class="form-element">
+                    <label for='tripReportAddRating'>Please rate this trail, from 0 to 5:</label>
+                    <input id='tripReportAddRating' name='tripReportAddRating' type=number min='0.0' max='5.0' step='0.5'/>
+                </div>
+                <div class="form-element">
+                    <label for='tripReportAddDifficulty'>Please indicate this hike's difficulty, from 0 to 5:</label>
+                    <input id='tripReportAddDifficulty' name='tripReportAddDifficulty' type=number min='0.0' max='5.0' step='0.5'/>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+            
+        <div id='tripReportAddConfirmation' style='display:none' class='card-content'>
+            <h3>Trip Report Add Confirmation</h3>
+            <p>Please confirm that you would like to add the following trip report.</p>
+            <ul id='tripReportAddConfirmationList'>
+            </ul>
+            <button id='tripReportAddConfirmationOK' type='submit'>Yes, please add this trip report</button>
+            <button id='tripReportAddConfirmationRedo' type='submit'>No thanks, I'd like to re-enter</button>
+        </div>
+        
+        <div id='tripReportAddError' style='display:none' class='card-content'>
+            <h3>Error Adding Trip Report</h3>
+            <p>We're afraid we encountered an error adding the trip resport.  Please feel free to try again.</p>
+            <button id='tripReportAddErrorButton' type='submit'>Try Again</button>
+        </div>
+        
+        <div id='tripReportAddConfirmed' style='display:none' class='card-content'>
+            <h3>Trip Report Successfully Added!</h3>
+            <p>The trip report was successfully added to the system.  Now everyone can read and learn from your experience.  Feel free to add another trip report if you like.</p>
+            <button id='tripReportAddConfirmedButton' type='submit'>Add Another Trip Report</button>
+        </div>
+    </div>
+
+    <div class="hr"></div>
+        <h2>View Trip Reports</h2>
+        <p>
+        Here we can show you trip reports left by others.  We are currently able to show you trip reports submitted on a certain trail, or trip reports written by a certain hiker.
+        </p>
+
+    <div id='viewTripReportsSearch'>
+        <div id='viewTripReportsByTrail' class="card">
+            <h3>View Trip Reports By Trail</h3>
+            <form id='viewTripReportsByTrailForm'>
+                <div class="form-element">
+                    <label for='viewTripReportsByTrailTrail'>For which trail would you like to see reports?</label>
+                    <select id="viewTripReportsByTrailTrail" name="viewTripReportsByTrailtrail">
+                        {{#each trails}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id='viewTripReportsByName' class="card">
+            <h3>View Trip Reports By Name</h3>
+            <form id='viewTripReportsByNameForm'>
+                <div class="form-element">
+                    <label for='viewTripReportsByNameName'>Whose trail reports would you like to see?</label>
+                    <select name="viewTripReportsByNameName" id="viewTripReportsByNameName">
+                        {{#each hikers}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div id='viewTripReportsSearchResults' class='card' style='display:none'>
+        <h3>Trip Reports Search Results</h3>
+        <p>Here are the trip reports we found that matched your search.</p>
+        <br />
+        <ul id='viewTripReportsSearchResultsList'>
+        </ul>
+        <button type="submit">Search Again</button>
+    </div>
+
+    <div id='viewTripReportsSearchNoResults' style='display:none' class='card'>
+        <h3>No Matching Trip Reports Located</h3>
+        <p>Unfortunately, we do not yet have any trip reports that match your search criteria.  Feel free to search again.</p>
+        <button id='viewTripReportsSearchNoResultsButton' type='submit'>Try Search Again</button>
+    </div>
+
+    <div id='viewTripReportsSearchError' style='display:none' class='card'>
+        <h3>Trip Reports Search Error</h3>
+        <p>Unfortunately, there was an error as we searched for the requested trip reports.  Feel free to try your search again.</p>
+        <button id='viewTripReportsSearchErrorButton' type='submit'>Try Search Again</button>
+    </div>
+</div>
+
+<script type='text/javascript' src='tripReportScript.js'></script>

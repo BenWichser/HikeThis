@@ -1,0 +1,94 @@
+<header>
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li class="active">Hikers</a>
+        <li><a href="./permit">Permits</a>
+        <li><a href="./trip-report">Trip Reports</a>
+        <li><a href="./trail">Trails</a>
+        <li><a href="./admin">Administration</a>
+    </ul>
+</header>
+
+<div class="content-wrapper">
+    <h1>Hikers</h1>
+    <div id='hikerText'>
+        <p>
+        Lace up your boots and get out on the trail. But first: please sign up below.
+        </p>
+    </div>
+
+    <div id='addingAHiker' class="card">
+        <div id='hikerAdd' class='card-content'>
+            <h3>Adding A Hiker</h3>
+            <form name='hikerAddForm' id='hikerAddForm'>
+                <div class='form-element'>
+                    <label for='hikerAddName'>What is this hiker's name?</label>
+                    <input name='hikerAddName' id='hikerAddName' type='text' maxlength='255' required />
+                </div>
+                <p>We will also record the date and time you joined HikeThis.  You can alter this time if you wish to time travel.</p>
+                <button id='hikerAddButton' type="submit">Submit</button>
+            </form>
+        </div>
+        <div id='hikerAddConfirmation' class='card-content' style='display:none'>
+            <h3>Please Confirm</h3>
+            <p>Please check the hiker information below and confirm you wish to add this hiker.</p>
+            <ul id='hikerAddConfirmationList'>
+            </ul>
+            <button id='hikerAddConfirmationConfirm' style='submit'>Confirm</button>
+            <button id='hikerAddConfirmationRedo' style='submit'>Redo</button>
+        </div>
+        <div id='hikerAddError' class='card-content' style='display:none'>
+            <h3>Error Adding Hiker</h3>
+            <p>We're afraid we encountered an error adding the hiker.  Feel free to try again.</p>
+            <button id='hikerAddErrorButton' type='submit'>Try Again</button>
+        </div>
+        <div id='hikerAddConfirmed' class='card-content' style='display:none'>
+            <h3>Hiker Successfully Added!</h3>
+            <p>The hiker was successfully added to the system.  Feel free to add another hiker if you like.</p>
+            <button id='hikerAddConfirmedButton' type='submit'>Add Another Hiker</button>
+        </div>
+    </div>
+    
+    <div id='searchingForAHiker' class="card">
+        <div id='hikerSearch' class='card-content'>
+            <h3>Searching For A Hiker</h3>
+            <p>Here you can search for a hiker by name.  Once you get your hiker information, you can edit or delete the hiker's record in our database.</p>
+            <form name='hikerSearchForm' id='hikerSearchForm'>
+                <div class='form-element'>
+                    <label for='hikerSearchName'>What is the name of the hiker you would like to look for?</label>
+                    <input name='hikerSearchName' id='hikerSearchName' type='text' maxlength='255' required />
+                </div>
+                <button id='hikerSearchSubmit' type='submit'>Submit</button>
+            </form>
+        </div>
+        <div id='hikerSearchResults' class='card-content' style='display:none'>
+            <h3>Hiker Search Results</h3>
+            <p>Here are the hikers we found.  Feel free to edit or delete any hiker.  Please use these powers for good.</p>
+            <br />
+            <table id='hikerSearchResultsTable'>
+               <thead id='hikerSearchResultsTableHead'>
+                   <tr>
+                       <th>Name</th>
+                       <th>Date and Time Added</th>
+                   </tr>
+               </thead>
+               <tbody id='hikerSearchResultsTableBody'>
+               </tbody>
+            </table>
+
+            <button id='hikerSearchResultsButton' type='submit'>Search Again</button>
+        </div>
+        <div id='hikerSearchNoResults' style='display:none' class='card-content'>
+            <h3>No Such Hikers Found</h3>
+            <p>Unfortunately, we could not locate any hikers with your search criteria.  Feel free to try your search again.</p>
+            <button id='hikerSearchNoResultsButton'>Try Search Again</button>
+        </div>
+        <div id='hikerSearchError' style='display:none' class='card-content'>
+         <h3>Hiker Search Error</h3>
+            <p>Unfortunately, there was an error as we searched for the requested hiker.  Feel free to try your search again.</p>
+            <button id='hikerSearchErrorButton' type='submit'>Try Search Again</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="hikerScript.js"></script>

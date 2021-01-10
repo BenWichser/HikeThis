@@ -1,0 +1,118 @@
+<header>
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./hiker">Hikers</a>
+        <li class="active">Permits</a>
+        <li><a href="./trip-report">Trip Reports</a>
+        <li><a href="./trail">Trails</a>
+        <li><a href="./admin">Administration</a>
+    </ul>
+</header>
+
+<div class="content-wrapper">
+    <h1>Permits</h1>
+    <div id='permitText'>
+        <p>
+            Perhaps you have a permit as well? Please use this form to enter any permit you may have. To help ensure
+            accurate information, all fields are required.
+        </p>
+    </div>
+
+    <div id='addingAPermit' class="card">
+        <div id='permitAdd' class='card-content'>
+            <h3>Adding a Permit</h3>
+            <form id='permitAddForm'>
+                <div class="form-element">
+                    <label for='permitAddHikerName'>What hiker will add the permit?</label>
+                    <input id='permitAddHikerName' name='permitAddHikerName' type='text' maxlength='255' required />
+                </div>
+                <div class="form-element">
+                    <label for='permitAddPermitName'>What permit is the hiker adding?</label>
+                    <select id='permitAddPermitName' name='permitAddPermitName' required>
+                        <option value=''>Please select a permit type below.</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label for='permitAddIssueDate'>When was this permit issued?</label>
+                    <input id='permitAddIssueDate' name='permitAddIssueDate' required type='date'>
+                </div>
+                <button id='permitAddSubmit' type="submit">Submit</button>
+            </form>
+        </div>
+        <div id='permitAddConfirmation' style='display:none' class='card-content'>
+            <h3>Permit Add Confirmation</h3>
+            <p>Please confirm that you would like to add the following permit.</p>
+            <ul id='permitAddConfirmationList'>
+            </ul>
+            <button id='permitAddConfirmationOK' type='submit'>Please Add This Permit</button>
+            <button id='permitAddConfirmationRedo' type='submit'>No thanks, I'd like to re-enter</button>
+        </div>
+        <div id='permitAddError' style='display:none' class='card-content'>
+            <h3>Error Adding Permit</h3>
+            <p>We're afraid we encountered an error adding the permit. Feel free to try again.</p>
+            <button id='permitAddErrorButton' type='submit'>Try Again</button>
+        </div>
+        <div id='permitAddConfirmed' style='display:none' class='card-content'>
+            <h3>Permit Successfully Added!</h3>
+            <p>The permit was successfully added to the system. Feel free to add another permit if you like.</p>
+            <button id='permitAddConfirmedButton' type='submit'>Add Another Permit</button>
+        </div>
+    </div>
+
+    <div id='searchingForAPermit' class="card">
+        <div id='permitSearch' class='card-content'>
+            <h3>Searching For A Permit</h3>
+            <p>Here you can search for a permit by hiker name or permit type. Once you get your permit information, you
+                can edit or delete the permit's record in our database. The permit search will be based on it meeting
+                all criteria, so entering less information will give more results than entering more information.</p>
+            <form name='permitSearchForm' id='permitSearchForm'>
+                <div class='form-element'>
+                    <label for='permitSearchHiker'>What is the name of the hiker whose permits you would like to
+                        see?</label>
+                    <input name='permitSearchHiker' id='permitSearchHiker' type='text' maxlength='255' />
+                </div>
+                <div class='form-element'>
+                    <label for='permitSearchPermitType'>What permit type would you like to search for?</label>
+                    <select id='permitSearchPermitType' name='permitSearchPermitType'>
+                        <option value=''>You can select permit type here</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <button id='permitSearchSubmit' type='submit'>Submit</button>
+            </form>
+        </div>
+        <div id='permitSearchResults' style='display:none' class='card-content'>
+            <h3>Permit Search Results</h3>
+            <p>Here are the permits we found. Feel free to edit or delete any permit. Please use these powers for good.
+            </p>
+            <br />
+            <table id='permitSearchResultsTable'>
+                <thead id='permitSearchResultsTableHead'>
+                    <tr>
+                        <th>Hiker Name</th>
+                        <th>Permit Name</th>
+                        <th>Date Acquired</th>
+                    </tr>
+                </thead>
+                <tbody id='permitSearchResultsTableBody'>
+                </tbody>
+            </table>
+            <button id='permitSearchResultsButton' type='submit'>Search Again</button>
+        </div>
+        <div id='permitSearchNoResults' style='display:none' class='card-content'>
+            <h3>No Such Permit Found</h3>
+            <p>Unfortunately, we could not locate any permits with your search criteria. Feel free to try your search
+                again.</p>
+            <button id='permitSearchNoResultsButton' type='submit'>Try Search Again</button>
+        </div>
+        <div id='permitSearchError' style='display:none' class='card-content'>
+            <h3>Permit Search Error</h3>
+            <p>Unfortunately, there was an error as we searched for the requested permit. Feel free to try your search
+                again.</p>
+            <button id='permitSearchErrorButton' type='submit'>Try Search Again</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="permitScript.js"></script>

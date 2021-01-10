@@ -1,0 +1,170 @@
+<header>
+    <ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./hiker">Hikers</a>
+        <li><a href="./permit">Permits</a>
+        <li><a href="./trip-report">Trip Reports</a>
+        <li class="active">Trails</a>
+        <li><a href="./admin">Administration</a>
+    </ul>
+</header>
+
+<div class="content-wrapper">
+    <h1>Trails: Find Your Adventure!</h1>
+
+    <div id='addingATrail' class="card">
+        <div id='trailAdd' class='card-content'>
+            <form name="trailAddForm" id="trailAddForm" method="POST" action="#">
+                <h2>Add A Trail</h2>
+                <p>
+                    If you'd like to write a trip report for a trail you can't find yet, please add the
+                    details here! You can then go back and add a Trip Report for it.
+                </p>
+                <div class="form-element">
+                    <label for='trailAddTrailName'>What is the trail name?</label>
+                    <input name="trailName" maxlength='100' type="text" id="trailAddTrailName" required>
+                </div>
+                <div class="form-element">
+                    <label for='trailAddLengthMiles'>How long is the trail in miles?</label>
+                    <input name="trailLengthMiles" id="trailAddLengthMiles" min='0.00'
+                        max='99999.99' step='0.01' type="number">
+                </div>
+                <div class="form-element">
+                    <label for='trailAddElevationGainFeet'>What is the elevation gain in feet?</label>
+                    <input name="trailAddElevationGainFeet" min=-999999 max=999999 default=0 id="trailAddElevationGainFeet" type="number">
+                </div>
+                <div class="form-element">
+                    <label for='trailAddCity'>Trail City?</label>
+                    <input name="trailAddCity" maxlength='100' id="trailAddCity">
+                </div>
+                <div class="form-element">
+                    <label for='trailAddState'>Trail State?</label>
+                    <input name="trailAddState" maxlength='64' id="trailAddState">
+                </div>
+                <div class="form-element">
+                    <label for='trailAddCountry'>Trail Country?</label>
+                    <input name="trailAddCountry" maxlength='2' id="trailAddCountry" required>
+                </div>
+                <h4>Add Permits (optional -- leave blank if none required)</h4>
+                <p>
+                    Add permits that can be used to hike this trail, if it requires a permit.
+                    If a permit is selected more than once, it will only be added a single time.
+                </p>
+                <div class="form-element">
+                    <label for='trailAddPermit1'>Permit #1</label>
+                    <select id='trailAddPermit1' name='trailAddPermit1'>
+                        <option value=''>(optional) Add a permit #1</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label for='trailAddPermit2'>Permit #2</label>
+                    <select id='trailAddPermit2' name='trailAddPermit2'>
+                        <option value=''>(optional) Add a permit #2</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <div class="form-element">
+                    <label for='trailAddPermit3'>Permit #3</label>
+                    <select id='trailAddPermit3' name='trailAddPermit3'>
+                        <option value=''>(optional) Add a permit #3</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+
+            <div id='trailAddConfirmation' style='display:none' class='card-content'>
+                <h3>Trail Add Confirmation</h3>
+                <p>Please confirm that you would like to add the following trail.</p>
+                <div id='trailAddConfirmationList'></div>
+                <button id='trailAddConfirmationOK' type='submit'>Yes, please add this trail!</button>
+                <button id='trailAddConfirmationRedo' type='submit'>No thanks, I'd like to re-enter</button>
+            </div>
+            
+            <div id='trailAddError' style='display:none' class='card-content'>
+                <h3>Error Adding Trail</h3>
+                <p>We're afraid we encountered an error adding the trail.  Please feel free to try again.</p>
+                <button id='trailAddErrorButton' type='submit'>Try Again</button>
+            </div>
+            
+            <div id='trailAddConfirmed' style='display:none' class='card-content'>
+                <h3>Trail Successfully Added!</h3>
+                <p>The trail was successfully added to the system.  Now everyone can read and learn from your experience.  Feel free to add another trail if you like.</p>
+                <button id='trailAddConfirmedButton' type='submit'>Add Another Trail</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div id='trailsView' class="card">
+        <div id='trailSearch' class='card-content'>
+            <h3>Trail Search</h3>
+            <p>Here we can help you view information about many trails. Feel free to search based on several criteria.
+                Please be aware that the search criteria are intersectional, so searching by name and city might return
+                fewer results than just searching by name. As a result, if the trail you're searching for doesn't
+                appear, you might have more success removing a search criteria.</p>
+            <form name='trailSearchForm' id='trailSearchForm'>
+                <div class="form-element">
+                    <label for='trailSearchName'>What is the trail's name?</label>
+                    <input type='text' maxlength='100' id='trailSearchName' name='trailSearchName' />
+                </div>
+                <div class="form-element">
+                    <label for='trailSearchMinimumLength'>What is minimum length for your trail? (in miles)</label>
+                    <input id='trailSearchMinimumLength' name='trailSearchMinimumLength' type='number' min='0.00'
+                        max='99999.99' step='0.01' />
+                </div>
+                <div class="form-element">
+                    <label for='trailSearchMaximumLength'>What is the maximum length for your trail? (in miles)</label>
+                    <input id='trailSearchMaximumLength' name='trailSearchMaximumLength' type='number' min='0.00'
+                        max='99999.99' step='0.01' />
+                </div>
+                <div class="form-element">
+                    <label for='trailSearchCity'>In what city is this trail located?</label>
+                    <input type='text' maxlength='100' id='trailSearchCity' name='trailSearchCity' />
+                </div>
+                <div class="form-element">
+                    <label for='trailSearchCountry'>In what country is this trail located? (Use 2-letter
+                        abbreviation)</label>
+                    <input type='text' maxlength='2' id='trailSearchCountry' name='trailSearchCountry' />
+                </div>
+                <div class="form-element">
+                    <label for='trailSearchPermit'>Does your trail require a permit?</label>
+                    <select id='trailSearchPermit' name='trailSearchPermit'>
+                        <option value='-1' selected>Unknown</option>
+                        <option value='0'>No Permit Required</option>
+                        {{#each permits}}<option value="{{id}}">{{name}}</option>{{/each}}
+                    </select>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id='trailSearchResults' style='display:none' class='card-content'>
+            <h3>Trail Search Results</h3>
+            <p>Here are the trails we found.</p>
+            <br />
+            <ul id='trailSearchResultsList'>
+            </ul>
+            <button id='trailSearchResultsButton' type='submit'>Search Again</button>
+        </div>
+
+        <div id='trailSearchNoResults' style='display:none' class='card-content'>
+                <h3>No Such Trail Found</h3>
+            <p>Unfortunately, we could not locate any trails with your search criteria. Feel free to try your search again.
+            </p>
+            <button id='trailSearchNoResultsButton' type='submit'>Try Search Again</button>
+        </div>
+
+        <div id='trailSearchError' style='display:none' class='card-content'>
+            <h3>Trail Search Error</h3>
+            <p>Unfortunately, there was an errror as we searched for the requested trails. Feel free to try your search
+                again.</p>
+            <button id='trailSearchErrorButton' type='submit'>Try Search Again</button>
+        </div>
+    </div>
+
+</div>
+
+<script type='text/javascript' src='trailScript.js'></script>
